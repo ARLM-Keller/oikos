@@ -82,7 +82,7 @@
 	   	    </repository>
 	</repositories>
 	<properties>
-	    <xingu.version>1.13-SNAPSHOT</xingu.version>
+	    <xingu.version>1.4.8-SNAPSHOT</xingu.version>
 	    <gwt.version>2.0.4</gwt.version>
 	</properties>
 </project>
