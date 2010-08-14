@@ -9,14 +9,14 @@
         		class="br.com.ibnetwork.guara.modules.impl.ModuleLoaderImpl">
 		<loader type="screens" recurse="true">
             <packages>
-                <package name="net.kidux.website.guara.modules.screens"/>
+                <package name="oikos.guara.modules.screens"/>
                 <package name="br.com.ibnetwork.guara.app.modules.screens"/>
 				<package name="br.com.ibnetwork.guara.modules.screens"/>
             </packages>
 		</loader>
 		<loader type="actions" recurse="true">
             <packages>
-				<package name="net.kidux.website.guara.modules.actions"/>
+				<package name="oikos.guara.modules.actions"/>
 				<package name="br.com.ibnetwork.guara.app.modules.actions"/>
                 <package name="br.com.ibnetwork.guara.modules.actions"/>
             </packages>
