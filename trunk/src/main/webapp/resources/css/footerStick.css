@@ -1,0 +1,34 @@
+/*
+ * 
+ * from http://qrayg.com/experiment/footerstick/
+ * 
+ */
+
+html, body 
+{
+	height: 100%; /* Required */
+}
+ 
+#page 
+{
+	position: relative;
+	min-height: 100%; /* For Modern Browsers */
+	height: auto !important; /* For Modern Browsers */
+	height: 100%; /* For IE */
+}
+ 
+#screen:after 
+{
+	clear: both;
+  	display: block;
+  	content: ".";
+  	height: 0;
+  	visibility: hidden;
+}
+
+#bottom
+{
+  	position: absolute;
+  	bottom: 0 !important;
+  	bottom: -1px; /* For Certain IE widths */
+}
