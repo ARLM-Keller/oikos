@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd">
 
-<!DOCTYPE web-app
-    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-    "web-app_2_3.dtd">
-
-<web-app>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
 	<servlet>
 		<servlet-name>guara</servlet-name>
 		<servlet-class>br.com.ibnetwork.guara.Guara</servlet-class>
@@ -18,6 +17,7 @@
 	</servlet>
 	
 	<!-- mappings -->
+	<!-- 
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>/resources/*</url-pattern>
@@ -34,6 +34,7 @@
 		<servlet-name>default</servlet-name>
 		<url-pattern>/selenium/*</url-pattern>
 	</servlet-mapping>
+	-->
 	<servlet-mapping>
 		<servlet-name>guara</servlet-name>
 		<url-pattern>/*</url-pattern>
@@ -48,4 +49,7 @@
 		</web-resource-collection>
 		<auth-constraint/>
 	</security-constraint>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 </web-app>

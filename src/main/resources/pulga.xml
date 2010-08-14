@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <pulga>
+	
+	<component	role="br.com.ibnetwork.guara.parameters.ParameterParserBuilder"
+				class="br.com.ibnetwork.guara.parameters.impl.ParameterParserBuilderImpl">
+		<fileUpload	enabled="false"/>				
+	</component>
+
+	<component	role="br.com.ibnetwork.xingu.container.Environment"
+				class="oikos.xingy.container.GaeEnvironment" />
+				
 	<component	role="br.com.ibnetwork.xingu.template.TemplateEngine"
 				class="br.com.ibnetwork.xingu.template.impl.freemarker.FreemarkerTemplateEngine">
 	</component>
