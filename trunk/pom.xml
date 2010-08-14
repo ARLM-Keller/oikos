@@ -17,7 +17,7 @@
 			<version>0.9.15</version>
 		</dependency>
 		
-		<!-- GWT -->
+		<!-- GWT 
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
@@ -28,6 +28,7 @@
             <artifactId>gwt-dev</artifactId>
             <version>${gwt.version}</version>
         </dependency>
+        -->
         
         <!--  GAE -->
         <dependency>
