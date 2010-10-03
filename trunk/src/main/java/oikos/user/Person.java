@@ -1,11 +1,19 @@
 package oikos.user;
 
-public class User
+import br.com.ibnetwork.guara.annotation.InputInfo;
+import br.com.ibnetwork.guara.app.crud.BeanSupport;
+import br.com.ibnetwork.xingu.validator.ann.ValidateRequired;
+
+public class Person
+    extends BeanSupport
 {
+    @ValidateRequired
     private String name;
     
+    @InputInfo(inputType="text", label="Email", format="dd/MM/yyyy")
     private String email;
     
+    @ValidateRequired
     private String password;
 
     public String getName()

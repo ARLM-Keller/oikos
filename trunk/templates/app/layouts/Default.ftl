@@ -6,11 +6,15 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="${content.getURI("/resources/css/footerStick.css")}" 	type="text/css" rel="stylesheet">
 		<link href="${content.getURI("/resources/css/global.css")}" 		type="text/css" rel="stylesheet">
+		<link href="${content.getURI("/resources/css/guara.css")}" 			type="text/css" rel="stylesheet">
 		<script type="text/javascript" src="${content.getURI("/resources/js/ajax.js")}"></script>
 	</head>
 	<body>
 		<div id="page"> 
-	    	<div id="top">${templateTool.render("navigations.Top")}</div> 
+	    	<div id="top">${templateTool.render("navigations.Top")}</div>
+	    	<#if data.hasMessage() >
+				<div class="systemMessage">[${data.message.type}] ${data.message.text}</div>	    	
+	    	</#if>
 		  	<div id="screen">${screen_placeholder}</div> 
 		  	<div id="bottom">${templateTool.render("navigations.Bottom")}</div> 
 		</div>

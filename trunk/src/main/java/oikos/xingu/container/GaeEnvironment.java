@@ -1,4 +1,4 @@
-package oikos.xingy.container;
+package oikos.xingu.container;
 
 import org.apache.commons.lang.SystemUtils;
 
