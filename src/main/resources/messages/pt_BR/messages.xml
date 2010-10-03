@@ -1,0 +1,12 @@
+<system-messages>
+	<message	id="userLogin">
+		{0}, bem vindo ao Oikos
+	</message>
+	<message	id="formError"
+				type="error">
+		Erro no preenchimento
+	</message>
+	<message	id="stored">
+		Objeto salvo com sucesso
+	</message>
+</system-messages>

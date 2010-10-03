@@ -1,13 +1,15 @@
+<#assign personMeta = beanTool.getBeanInfo("oikos.user.Person")/>
 <h1>Cadastro de Usuários</h1>
 
-<form 	action="${link.action("UserControl").exec("doStore")}"
-		method="POST">
+<#--
+<@f.bean id=0 meta=personMeta/>
+-->
 
-	Nome
-	<input id="name" name="name" type="text"/>
-
-	Email
-	<input id="email" name="email" type="text"/>
-
-	<input type="submit"/>
-</form> 
+<form	id=""
+		name=""
+		method="POST"
+		action="${link.action("RegistryControl").exec("store")}">
+	Nome <@f.field meta=personMeta fieldName="name"/>
+	Email <@f.field meta=personMeta fieldName="email"/>
+	<input type="submit" value="enviar"/>
+</form>

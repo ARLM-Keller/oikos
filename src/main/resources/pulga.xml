@@ -8,7 +8,7 @@
 	</component>
 
 	<component	role="br.com.ibnetwork.xingu.container.Environment"
-				class="oikos.xingy.container.GaeEnvironment" />
+				class="oikos.xingu.container.GaeEnvironment" />
 				
 	<component	role="br.com.ibnetwork.xingu.template.TemplateEngine"
 				class="br.com.ibnetwork.xingu.template.impl.freemarker.FreemarkerTemplateEngine">
@@ -35,7 +35,7 @@
 	<component	role= "br.com.ibnetwork.guara.message.SystemMessageBroker"
              	class="br.com.ibnetwork.guara.message.impl.SystemMessageBrokerImpl">
 		<localeConfig language="pt" country="BR"/>
-		<repository path="${app.root}/resources/messages/"/>
+		<repository path="${app.root}/src/main/resources/messages/"/>
 	</component>
 
 	<component	role="br.com.ibnetwork.guara.pull.PullManager"
@@ -53,7 +53,16 @@
 			<tool 	name="referenceTool"	
 					scope="global"	
 					className="br.com.ibnetwork.guara.pull.tools.ReferenceTool"/>
+			<tool 	name="beanTool"	
+					scope="global"	
+					className="oikos.guara.pull.tools.BeanTool">
+				<packages>
+					<package name="oikos.user"/>
+				</packages>
+			</tool>
 		</tools>
 	</component>
 	
+	<component	role="br.com.ibnetwork.xingu.store.ObjectStore"
+				class="br.com.ibnetwork.xingu.store.impl.memory.InMemoryObjectStore" />
 </pulga>

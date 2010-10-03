@@ -1,0 +1,10 @@
+table  {
+	border: 1px solid red;
+}
+
+.systemMessage {
+	background-color: red;
+	color: white;
+	padding: 4px;
+	text-align: center;
+}
