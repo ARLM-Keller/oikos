@@ -51,9 +51,9 @@
             <version>${guara.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>freemarker</groupId>
-			<artifactId>freemarker</artifactId>
-			<version>2.3.9</version>
+			<groupId>br.com.ibnetwork.guara</groupId>
+			<artifactId>guara-app</artifactId>
+            <version>${guara.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -61,6 +61,12 @@
 			<version>2.3</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.0.3</version>
+			<scope>provided</scope>
+		</dependency>		
 	</dependencies>
 	<build>
 		<testResources>
