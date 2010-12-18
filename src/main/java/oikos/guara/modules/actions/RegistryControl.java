@@ -37,30 +37,44 @@ public class RegistryControl
         String[] groups = formGroups.split(",");
         for (String group : groups)
         {
-            Object bean = createBean(params, group);
-            ValidatorContext validatorContext = new ValidatorContext();
-            boolean valid = validator.validate(bean, validatorContext);
-            System.out.println(bean + " ? " + valid);
-            if(!valid)
-            {
-                String[] fields = validatorContext.getFields();
-                for (String field : fields)
-                {
-                    ValidatorResult result = validatorContext.get(field);
-                    Validator validator = result.getValidator(); 
-                    String errorMessage = validator.getMessage();
-                    String errorMessageId = validator.getMessageId();
-                    
-                    System.out.println(field + " = " + result.isValid());
-                    System.out.println(errorMessage+" OR "+errorMessageId);
-                    System.out.println("");
-                }
-            }
+            BeanInfo beanInfo = createBean(params, group);
+            boolean valid = validate(beanInfo);
         }
         return Outcome.UNKNOWN;
     }
 
-    private Object createBean(Parameters params, String beanClass)
+    private boolean validate(BeanInfo beanInfo)
+        throws Exception
+    {
+        Object bean = beanInfo.getBean();
+        System.out.println("[" + bean + "]");
+        
+        ValidatorContext validatorContext = new ValidatorContext();
+        boolean valid = validator.validate(bean, validatorContext);
+        String[] fields = validatorContext.getFields();
+        for (String fieldName : fields)
+        {
+            ValidatorResult result = validatorContext.get(fieldName);
+            String value = beanInfo.getValueFormatted(fieldName);
+            boolean fieldValid = result.isValid();
+            System.out.print("\t" + (fieldValid ? StringUtils.EMPTY : "* ") + fieldName + " = " + value);
+
+            if(!fieldValid)
+            {
+                Validator validator = result.getValidator(); 
+                if(validator != null)
+                {
+                    String errorMessageId = validator.getMessageId();
+                    System.out.print(" ("+errorMessageId+")");
+                }
+            }
+            System.out.println("");
+        }
+        System.out.println("");
+        return valid;
+    }
+
+    private BeanInfo createBean(Parameters params, String beanClass)
         throws Exception
     {
         beanClass = StringUtils.trim(beanClass);
@@ -70,7 +84,7 @@ public class RegistryControl
         Map<String, String> values = params.getProperties(prefix, true); 
         Object bean = beanInfo.getBean(); 
         BeanUtils.populate(bean, values);
-        return bean;
+        return beanInfo;
     }
 
     @Override
