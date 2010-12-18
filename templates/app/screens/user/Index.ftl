@@ -1,4 +1,5 @@
 <#assign personMeta = beanTool.getBeanInfo("oikos.user.Person") />
+<#assign churchMeta = beanTool.getBeanInfo("oikos.om.Church") />
 <h1>Cadastro de Usuários</h1>
 
 <#if storeResults?? >
@@ -31,9 +32,18 @@
 <form	id=""
 		name=""
 		method="POST"
-		action="${link.action("RegistryControl").exec("store")}">
+		action="${link.action("RegistryControl").exec("storeNew")}">
+	<input type="hidden" name="formGroups" value="oikos.user.Person, oikos.om.Church" />
+	
+	<h3>Dados pessoais</h3>
 	Nome <@f.field meta=personMeta fieldName="name"/>
 	Email <@f.field meta=personMeta fieldName="email"/>
 	Senha <@f.field meta=personMeta fieldName="password"/>
+	
+	<h3>Dados da Igreja</h3>
+	Nome <@f.field meta=churchMeta fieldName="name"/>
+	Número de membros <@f.field meta=churchMeta fieldName="membersCount"/>
+	Comentários <@f.field meta=churchMeta fieldName="comments"/>
+
 	<input type="submit" value="enviar"/>
 </form>
