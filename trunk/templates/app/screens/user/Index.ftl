@@ -45,5 +45,5 @@
 	Número de membros <@f.field meta=churchMeta fieldName="membersCount"/>
 	Comentários <@f.field meta=churchMeta fieldName="comments"/>
 
-	<input type="submit" value="enviar"/>
+	<input id="sendForm" type="submit" value="enviar"/>
 </form>
