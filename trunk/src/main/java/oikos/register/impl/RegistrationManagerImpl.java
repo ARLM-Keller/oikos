@@ -2,11 +2,8 @@ package oikos.register.impl;
 
 import java.util.List;
 
-import javax.mail.Message;
-import javax.mail.Message.RecipientType;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
+import oikos.email.ConfirmEmail;
+import oikos.email.EmailManager;
 import oikos.register.Registration;
 import oikos.register.RegistrationManager;
 import oikos.user.Person;
@@ -17,14 +14,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.com.ibnetwork.xingu.container.Inject;
-import br.com.ibnetwork.xingu.messaging.MessageDispatcher;
 import br.com.ibnetwork.xingu.store.ObjectStore;
 
 public class RegistrationManagerImpl
     implements RegistrationManager, Initializable
 {
     @Inject
-    private MessageDispatcher messageDispatcher;
+    private EmailManager emailManager;
     
     @Inject
     private ObjectStore store;
@@ -51,25 +47,13 @@ public class RegistrationManagerImpl
         logger.info("New registration {} for {}", code, email);
         try
         {
-            Message message = createConfirmationMessage(registration, person.getName());
-            //messageDispatcher.sendMessage(message);
+            emailManager.sendMessage(new ConfirmEmail(person.getName(), registration.getEmail(), registration.getCode()));
         }
         catch (Throwable t)
         {
             logger.error("Error sending confirmation email to: "+email, t);
         }
         return registration;
-    }
-
-    private Message createConfirmationMessage(Registration registration, String name)
-        throws Exception
-    {
-        Message message = new MimeMessage(messageDispatcher.getSession());
-        message.setFrom(new InternetAddress("cadastro@kidux.net", "Oikos"));
-        message.setRecipient(RecipientType.TO, new InternetAddress(registration.getEmail()));
-        message.setSubject("Confirme seu email no Oikos");
-        //message.setContent(messageContent(account, url), "text/html; charset=utf-8");
-        return message;
     }
 
     private String nextAvailableCode()
