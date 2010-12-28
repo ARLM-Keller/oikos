@@ -4,8 +4,6 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import br.com.ibnetwork.guara.app.modules.GuaraModuleSupport;
 import br.com.ibnetwork.guara.metadata.BeanInfo;
@@ -15,7 +13,6 @@ import br.com.ibnetwork.guara.rundata.RunData;
 import br.com.ibnetwork.xingu.container.Inject;
 import br.com.ibnetwork.xingu.factory.Factory;
 import br.com.ibnetwork.xingu.template.Context;
-import br.com.ibnetwork.xingu.utils.ObjectUtils;
 import br.com.ibnetwork.xingu.validator.ValidatorContext;
 import br.com.ibnetwork.xingu.validator.ValidatorResult;
 import br.com.ibnetwork.xingu.validator.validators.Validator;
@@ -26,7 +23,7 @@ public class RegistryControl
     @Inject
     private Factory factory;
     
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    //private Logger logger = LoggerFactory.getLogger(getClass());
     
     public Outcome store(RunData data, Context ctx) 
         throws Exception
@@ -84,11 +81,10 @@ public class RegistryControl
         throws Exception
     {
         beanClass = StringUtils.trim(beanClass);
-        Class<?> clazz = ObjectUtils.loadClass(beanClass);
-        BeanInfo beanInfo = factory.create(BeanInfo.class, clazz);
+        Object bean = factory.create(beanClass);
+        BeanInfo beanInfo = factory.create(BeanInfo.class, bean);
         String prefix = beanInfo.getFieldPrefix();
         Map<String, String> values = params.getProperties(prefix, true); 
-        Object bean = beanInfo.getBean(); 
         BeanUtils.populate(bean, values);
         return beanInfo;
     }
