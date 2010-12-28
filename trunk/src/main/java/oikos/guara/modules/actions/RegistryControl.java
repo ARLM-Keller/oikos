@@ -2,6 +2,10 @@ package oikos.guara.modules.actions;
 
 import java.util.Map;
 
+import oikos.register.Registration;
+import oikos.register.RegistrationManager;
+import oikos.user.Person;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -23,7 +27,23 @@ public class RegistryControl
     @Inject
     private Factory factory;
     
+    @Inject
+    private RegistrationManager registrationManager;
+    
     //private Logger logger = LoggerFactory.getLogger(getClass());
+    
+    public Outcome register(RunData data, Context ctx) 
+        throws Exception
+    {
+        Parameters params = data.getParameters();
+        BeanInfo beanInfo = createBean(params, Person.class.getName());
+        
+        //TODO: validate person
+        Person person = (Person) beanInfo.getBean();
+        Registration registration = registrationManager.register(person);
+        System.out.println(registration.getCode());
+        return Outcome.UNKNOWN;
+    }
     
     public Outcome store(RunData data, Context ctx) 
         throws Exception
