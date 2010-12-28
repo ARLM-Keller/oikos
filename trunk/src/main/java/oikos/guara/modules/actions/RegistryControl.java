@@ -18,7 +18,6 @@ import br.com.ibnetwork.guara.rundata.Outcome;
 import br.com.ibnetwork.guara.rundata.RunData;
 import br.com.ibnetwork.xingu.container.Inject;
 import br.com.ibnetwork.xingu.factory.Factory;
-import br.com.ibnetwork.xingu.lang.NotImplementedYet;
 import br.com.ibnetwork.xingu.template.Context;
 import br.com.ibnetwork.xingu.validator.ValidatorContext;
 import br.com.ibnetwork.xingu.validator.ValidatorResult;
@@ -45,13 +44,19 @@ public class RegistryControl
         Person person = (Person) beanInfo.getBean();
         String email = person.getEmail();
         Registration registration = registrationManager.byEmail(email);
+        Outcome outcome;
         if(registration != null)
         {
             logger.info("Can't register '{}' again", email);
-            throw new NotImplementedYet();
+            outcome = Outcome.error(this, "register");
         }
-        registration = registrationManager.register(person);
-        return Outcome.UNKNOWN;
+        else
+        {
+            registration = registrationManager.register(person);
+            outcome = Outcome.success(this, "register");
+        }
+        ctx.put("registration", registration);
+        return outcome;
     }
     
     public Outcome store(RunData data, Context ctx) 
