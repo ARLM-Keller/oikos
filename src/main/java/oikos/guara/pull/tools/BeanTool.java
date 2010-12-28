@@ -76,8 +76,8 @@ public class BeanTool
 		BeanInfo metadata = metaCache.get(className);
 		if(metadata == null)
 		{
-			Class<?> clazz = getBeanClass(className);
-			metadata = (BeanInfo) factory.create(BeanInfo.class, new Object[]{clazz});
+			Object bean = factory.create(className);
+			metadata = (BeanInfo) factory.create(BeanInfo.class, bean);
 			metaCache.put(className, metadata);
 		}
 		return metadata;
