@@ -82,7 +82,7 @@ public class RegistryControl
     {
         beanClass = StringUtils.trim(beanClass);
         Object bean = factory.create(beanClass);
-        BeanInfo beanInfo = factory.create(BeanInfo.class, bean);
+        BeanInfo beanInfo = new BeanInfo(bean);
         String prefix = beanInfo.getFieldPrefix();
         Map<String, String> values = params.getProperties(prefix, true); 
         BeanUtils.populate(bean, values);

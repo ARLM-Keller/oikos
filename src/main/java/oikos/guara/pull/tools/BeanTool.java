@@ -66,7 +66,7 @@ public class BeanTool
 	
 	public BeanInfo getBeanInfo(Object bean)
 	{
-		BeanInfo info = factory.create(BeanInfo.class, bean);
+		BeanInfo info = new BeanInfo(bean);
 		return info;
 	}
 
@@ -77,7 +77,7 @@ public class BeanTool
 		if(metadata == null)
 		{
 			Object bean = factory.create(className);
-			metadata = (BeanInfo) factory.create(BeanInfo.class, bean);
+			metadata = new BeanInfo(bean);
 			metaCache.put(className, metadata);
 		}
 		return metadata;
