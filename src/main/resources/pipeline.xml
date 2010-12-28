@@ -21,8 +21,10 @@
 		<valve name="renderScreen" 	className="br.com.ibnetwork.guara.pipeline.valve.view.RenderScreen">
 			<templateMapping>
 				<module name="RegistryControl">
-					<outcome 	code="SUCCESS"	method="store"	template="user.Index"/>
-					<outcome 	code="ERROR"	method="store"	template="user.Index"/>
+					<outcome 	code="SUCCESS"	method="store"		template="user.Index"/>
+					<outcome 	code="ERROR"	method="store"		template="user.Index"/>
+					<outcome 	code="SUCCESS"	method="register"	template="register.ConfirmRegistration"/>
+					<outcome 	code="ERROR"	method="register"	template="register.Error"/>
 				</module>
 			</templateMapping>		
 		</valve>

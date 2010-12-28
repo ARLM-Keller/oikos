@@ -1,0 +1,1 @@
+Já existe um usuário registrado com o email <b>${registration.email}</b>

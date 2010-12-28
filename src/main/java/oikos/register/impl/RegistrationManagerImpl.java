@@ -17,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.com.ibnetwork.xingu.container.Inject;
-import br.com.ibnetwork.xingu.lang.NotImplementedYet;
 import br.com.ibnetwork.xingu.messaging.MessageDispatcher;
 import br.com.ibnetwork.xingu.store.ObjectStore;
 
@@ -53,7 +52,7 @@ public class RegistrationManagerImpl
         try
         {
             Message message = createConfirmationMessage(registration, person.getName());
-            messageDispatcher.sendMessage(message);
+            //messageDispatcher.sendMessage(message);
         }
         catch (Throwable t)
         {
