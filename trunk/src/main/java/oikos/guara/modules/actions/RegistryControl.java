@@ -8,6 +8,8 @@ import oikos.user.Person;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import br.com.ibnetwork.guara.app.modules.GuaraModuleSupport;
 import br.com.ibnetwork.guara.metadata.BeanInfo;
@@ -16,6 +18,7 @@ import br.com.ibnetwork.guara.rundata.Outcome;
 import br.com.ibnetwork.guara.rundata.RunData;
 import br.com.ibnetwork.xingu.container.Inject;
 import br.com.ibnetwork.xingu.factory.Factory;
+import br.com.ibnetwork.xingu.lang.NotImplementedYet;
 import br.com.ibnetwork.xingu.template.Context;
 import br.com.ibnetwork.xingu.validator.ValidatorContext;
 import br.com.ibnetwork.xingu.validator.ValidatorResult;
@@ -30,7 +33,7 @@ public class RegistryControl
     @Inject
     private RegistrationManager registrationManager;
     
-    //private Logger logger = LoggerFactory.getLogger(getClass());
+    private Logger logger = LoggerFactory.getLogger(getClass());
     
     public Outcome register(RunData data, Context ctx) 
         throws Exception
@@ -40,8 +43,14 @@ public class RegistryControl
         
         //TODO: validate person
         Person person = (Person) beanInfo.getBean();
-        Registration registration = registrationManager.register(person);
-        System.out.println(registration.getCode());
+        String email = person.getEmail();
+        Registration registration = registrationManager.byEmail(email);
+        if(registration != null)
+        {
+            logger.info("Can't register '{}' again", email);
+            throw new NotImplementedYet();
+        }
+        registration = registrationManager.register(person);
         return Outcome.UNKNOWN;
     }
     
