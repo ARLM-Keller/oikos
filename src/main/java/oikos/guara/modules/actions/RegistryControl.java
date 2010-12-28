@@ -1,21 +1,19 @@
 package oikos.guara.modules.actions;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-
-import oikos.user.Person;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import br.com.ibnetwork.guara.app.modules.actions.SingleCrudControlSupport;
+import br.com.ibnetwork.guara.app.modules.GuaraModuleSupport;
 import br.com.ibnetwork.guara.metadata.BeanInfo;
 import br.com.ibnetwork.guara.parameters.Parameters;
 import br.com.ibnetwork.guara.rundata.Outcome;
 import br.com.ibnetwork.guara.rundata.RunData;
 import br.com.ibnetwork.xingu.container.Inject;
 import br.com.ibnetwork.xingu.factory.Factory;
-import br.com.ibnetwork.xingu.store.PersistentBean;
 import br.com.ibnetwork.xingu.template.Context;
 import br.com.ibnetwork.xingu.utils.ObjectUtils;
 import br.com.ibnetwork.xingu.validator.ValidatorContext;
@@ -23,24 +21,32 @@ import br.com.ibnetwork.xingu.validator.ValidatorResult;
 import br.com.ibnetwork.xingu.validator.validators.Validator;
 
 public class RegistryControl
-    extends SingleCrudControlSupport
+    extends GuaraModuleSupport
 {
-
     @Inject
     private Factory factory;
     
-    public Outcome storeNew(RunData data, Context ctx) 
+    private Logger logger = LoggerFactory.getLogger(getClass());
+    
+    public Outcome store(RunData data, Context ctx) 
         throws Exception
     {
         Parameters params = data.getParameters();
         String formGroups = params.get("formGroups");
         String[] groups = formGroups.split(",");
+        boolean valid = true;
         for (String group : groups)
         {
             BeanInfo beanInfo = createBean(params, group);
-            boolean valid = validate(beanInfo);
+            boolean beanValid = validate(beanInfo);
+            valid = valid && beanValid;
         }
-        return Outcome.UNKNOWN;
+        if(valid)
+        {
+            //TODO: store objects
+            return Outcome.success(this, "store");
+        }
+        return Outcome.error(this, "store");
     }
 
     private boolean validate(BeanInfo beanInfo)
@@ -85,24 +91,5 @@ public class RegistryControl
         Object bean = beanInfo.getBean(); 
         BeanUtils.populate(bean, values);
         return beanInfo;
-    }
-
-    @Override
-    protected PersistentBean createFromRequest(RunData data) 
-        throws Exception
-    {
-        Parameters params = data.getParameters();
-        Map<String, String> values = params.getProperties("person.", true); 
-        Person person = factory.create(Person.class);
-        BeanUtils.populate(person, values);
-        return person;
-    }
-
-    //TODO: move this code to Parameters
-
-    @Override
-    protected Class getBeanClass()
-    {
-        return null;
     }
 }

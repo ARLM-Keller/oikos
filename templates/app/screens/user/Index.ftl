@@ -32,7 +32,7 @@
 <form	id=""
 		name=""
 		method="POST"
-		action="${link.action("RegistryControl").exec("storeNew")}">
+		action="${link.action("RegistryControl").exec("store")}">
 	<input type="hidden" name="formGroups" value="oikos.user.Person, oikos.om.Church" />
 	
 	<h3>Dados pessoais</h3>
