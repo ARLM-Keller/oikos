@@ -13,24 +13,7 @@
 
 		<div id="page"> 
 			<@g.debug>
-				<div style="text-align: left;">
-					<h3>RunData</h3>
-					<b>Template:</b> ${pageInfo.template!""} <br/>
-					<b>Screen:</b> ${pageInfo.screenName!""} <br/>
-					<b>Action:</b> ${pageInfo.actionName!""} <br/>
-					
-					<h3>Parameters</h3>
-					<#assign keys = parameters.keySet() />
-					<#list keys as key>
-						${key} = ${parameters.get(key)}<br/> 
-					</#list> 
-					
-					<h3>Session</h3>
-					<#assign session = data.request.session />
-					<#list session.attributeNames as key>
-						${key} = ${session.getAttribute(key)} <br/>
-					</#list>
-				</div>
+				<@g.frameworkInfo/>
 			</@g.debug>
 			<#if pageInfo.template?starts_with("admin.") >
 	    		<div id="top">${templateTool.render("navigations.admin.Top")}</div>
