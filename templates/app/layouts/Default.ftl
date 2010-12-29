@@ -11,7 +11,11 @@
 	</head>
 	<body>
 		<div id="page"> 
-	    	<div id="top">${templateTool.render("navigations.Top")}</div>
+			<#if pageInfo.template?starts_with("admin.") >
+	    		<div id="top">${templateTool.render("navigations.admin.Top")}</div>
+			<#else>
+				<div id="top">${templateTool.render("navigations.Top")}</div>
+			</#if>
 	    	<#if data.hasMessage() >
 				<div class="systemMessage">[${data.message.type}] ${data.message.text}</div>	    	
 	    	</#if>
