@@ -16,4 +16,6 @@ public interface Registration
     Date getConfirmationDate();
     
     void confirm();
+
+    boolean isConfirmed();
 }

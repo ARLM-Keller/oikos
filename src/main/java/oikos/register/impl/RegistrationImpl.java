@@ -10,7 +10,6 @@ public class RegistrationImpl
     extends BeanSupport
     implements Registration
 {
-
     private String email;
     
     private String code;
@@ -66,5 +65,11 @@ public class RegistrationImpl
     public void confirm()
     {
         confirmed = System.currentTimeMillis();
+    }
+
+    @Override
+    public boolean isConfirmed()
+    {
+        return confirmed > 0;
     }
 }

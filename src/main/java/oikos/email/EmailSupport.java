@@ -8,14 +8,14 @@ import javax.mail.internet.InternetAddress;
 public abstract class EmailSupport
     implements Email
 {
-    private final String email;
+    protected final String email;
     
-    private final String name;
+    protected final String name;
 
     public EmailSupport(String name, String email)
     {
-        this.email = email;
         this.name = name;
+        this.email = email;
     }
 
     @Override
@@ -27,7 +27,7 @@ public abstract class EmailSupport
     @Override
     public Address getTo()
     {
-        return toAddress(email, name);
+        return toAddress(name, email);
     }
 
     @Override

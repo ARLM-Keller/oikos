@@ -9,7 +9,7 @@ public class ConfirmEmail
 
     public ConfirmEmail(String name, String email, String code)
     {
-        super(email, name);
+        super(name, email);
         this.code = code;
     }
 
@@ -24,4 +24,13 @@ public class ConfirmEmail
         return "email/register/Confirm";
     }
 
+    public String getName()
+    {
+        return name;
+    }
+    
+    public String getEmail()
+    {
+        return email;
+    }
 }

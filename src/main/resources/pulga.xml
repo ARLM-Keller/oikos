@@ -68,14 +68,18 @@
 
     <component  role="br.com.ibnetwork.xingu.messaging.MessageDispatcher"
                 class="br.com.ibnetwork.xingu.messaging.impl.MessageDispatcherImpl">
-        <!-- kidux.net -->
+        <!-- combre -->
         <smtpServer
-            address="72.14.184.155"
-            port="2525"
-            authEnabled="false"
-            tlsEnabled="false"
+            address="smtp.gmail.com"
+            port="587"
+            authEnabled="true"
+            tlsEnabled="true"
             username="cadastro@kidux.net"
-            password="xxx"/>
+            password="kidux01"/>
     </component>
-				
+
+	<component	role="oikos.email.EmailManager"
+				class="oikos.email.impl.EmailManagerImpl">
+		<delivery enabled="false"/>
+	</component>
 </pulga>

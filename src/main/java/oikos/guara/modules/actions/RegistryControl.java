@@ -52,13 +52,47 @@ public class RegistryControl
         }
         else
         {
-            registration = registrationManager.register(person);
-            outcome = Outcome.success(this, "register");
+            try
+            {
+                registration = registrationManager.register(person.getName(), person.getEmail());
+                outcome = Outcome.success(this, "register");
+            }
+            catch(Exception e)
+            {
+                return Outcome.error(this, "register");
+            }
         }
         ctx.put("registration", registration);
         return outcome;
     }
-    
+
+    public Outcome confirm(RunData data, Context ctx) 
+        throws Exception
+    {
+        Parameters params = data.getParameters();
+        String email = params.get("email");
+        String code = params.get("code");
+        Registration registration = registrationManager.byCode(code);
+        if(registration == null)
+        {
+            return Outcome.unknown("REGISTRATION:NO_CODE", this, "confirm");
+        }
+        if(!registration.getEmail().equals(email))
+        {
+            return Outcome.unknown("REGISTRATION:EMAIL_MISMATCH", this, "confirm");
+        }
+        if(registration.isConfirmed())
+        {
+            //TODO: what should we do?
+            //create a ticket to handle this
+        }
+        registration.confirm();
+        registrationManager.store(registration);
+
+        
+        return Outcome.success(this, "confirm");
+    }
+
     public Outcome store(RunData data, Context ctx) 
         throws Exception
     {

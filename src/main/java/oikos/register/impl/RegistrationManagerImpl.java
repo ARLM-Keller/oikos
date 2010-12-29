@@ -6,7 +6,6 @@ import oikos.email.ConfirmEmail;
 import oikos.email.EmailManager;
 import oikos.register.Registration;
 import oikos.register.RegistrationManager;
-import oikos.user.Person;
 
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.commons.lang.RandomStringUtils;
@@ -37,9 +36,16 @@ public class RegistrationManagerImpl
     }
 
     @Override
-    public Registration register(Person person)
+    public void store(Registration registration)
+        throws Exception
     {
-        String email = person.getEmail();
+        store.store(registration);
+    }
+
+    @Override
+    public Registration register(String name, String email)
+        throws Exception
+    {
         String code = nextAvailableCode();
         Registration registration = new RegistrationImpl(email, code);
         store.store(registration);
@@ -47,11 +53,12 @@ public class RegistrationManagerImpl
         logger.info("New registration {} for {}", code, email);
         try
         {
-            emailManager.sendMessage(new ConfirmEmail(person.getName(), registration.getEmail(), registration.getCode()));
+            emailManager.sendMessage(new ConfirmEmail(name, registration.getEmail(), registration.getCode()));
         }
-        catch (Throwable t)
+        catch (Exception t)
         {
             logger.error("Error sending confirmation email to: "+email, t);
+            throw t;
         }
         return registration;
     }
