@@ -4,6 +4,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.Message.RecipientType;
 import javax.mail.internet.MimeMessage;
@@ -12,6 +13,9 @@ import oikos.email.Email;
 import oikos.email.EmailManager;
 
 import org.apache.avalon.framework.activity.Startable;
+import org.apache.avalon.framework.configuration.Configurable;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +26,7 @@ import br.com.ibnetwork.xingu.template.Context;
 import br.com.ibnetwork.xingu.template.TemplateEngine;
 
 public class EmailManagerImpl
-    implements EmailManager, Runnable, Startable
+    implements EmailManager, Runnable, Configurable, Startable
 {
     @Inject
     private MessageDispatcher messageDispatcher;
@@ -35,7 +39,16 @@ public class EmailManagerImpl
     private List<Message> queue = new ArrayList<Message>();
     
     private Logger logger = LoggerFactory.getLogger(getClass());
+
+    private boolean deliveryEnabled;    
     
+    @Override
+    public void configure(Configuration conf)
+        throws ConfigurationException
+    {
+        this.deliveryEnabled = conf.getChild("delivery").getAttributeAsBoolean("enabled", true);
+    }
+
     @Override
     public void start()
         throws Exception
@@ -72,6 +85,11 @@ public class EmailManagerImpl
 
     private void send(Message message)
     {
+        if(!deliveryEnabled)
+        {
+            logger.warn("Email delivery is not enabled!");
+            return;
+        }
         try
         {
             messageDispatcher.sendMessage(message);
@@ -102,11 +120,21 @@ public class EmailManagerImpl
     private Message createMessageFrom(Email email)
         throws Exception
     {
+        Address to = email.getTo();
+        Address from = email.getFrom();
+        String subject = email.getSubject();
         Message message = new MimeMessage(messageDispatcher.getSession());
-        message.setFrom(email.getFrom());
-        message.setRecipient(RecipientType.TO, email.getTo());
-        message.setSubject(email.getSubject());
+        message.setFrom(from);
+        message.setRecipient(RecipientType.TO, to);
+        message.setSubject(subject);
 
+        String html = renderMessageContent(email);
+        message.setContent(html, "text/html; charset=utf-8");
+        return message;
+    }
+
+    private String renderMessageContent(Email email)
+    {
         Context context = templateEngine.createContext();
         context.put("email", email);
         StringWriter writer = new StringWriter();
@@ -114,8 +142,6 @@ public class EmailManagerImpl
         templateEngine.merge(template, context, writer);
         StringBuffer buffer = writer.getBuffer();
         String html = buffer.toString();
-        
-        message.setContent(html, "text/html; charset=utf-8");
-        return message;
+        return html;
     }
 }

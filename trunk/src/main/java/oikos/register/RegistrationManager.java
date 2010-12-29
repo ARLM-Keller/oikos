@@ -1,12 +1,15 @@
 package oikos.register;
 
-import oikos.user.Person;
 
 public interface RegistrationManager
 {
-    Registration register(Person person);
+    Registration register(String name, String email)
+        throws Exception;
     
     Registration byCode(String code);
     
     Registration byEmail(String email);
+
+    void store(Registration registration)
+        throws Exception;
 }
