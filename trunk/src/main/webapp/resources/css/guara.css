@@ -8,3 +8,11 @@ table  {
 	padding: 4px;
 	text-align: center;
 }
+
+.debug {
+	border: 1px solid red;
+	background-color: orange;
+	color: white;
+	margin: 8px;
+	padding: 16px;
+}

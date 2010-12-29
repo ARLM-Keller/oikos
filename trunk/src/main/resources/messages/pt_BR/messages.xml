@@ -1,12 +1,8 @@
 <system-messages>
-	<message	id="userLogin">
-		{0}, bem vindo ao Oikos
-	</message>
-	<message	id="formError"
-				type="error">
-		Erro no preenchimento
-	</message>
-	<message	id="stored">
-		Objeto salvo com sucesso
-	</message>
+	<message	id="userLogin"		type="info">{0}, bem vindo ao Oikos</message>
+	<message	id="stored"			type="info">Objeto salvo com sucesso</message>
+	
+	<message	id="registerWarn" 	type="warn">Houve um erro no processo de cadastro. Por favor, reinicie </message>
+	
+	<message	id="formError" 		type="error">Erro no preenchimento</message>
 </system-messages>

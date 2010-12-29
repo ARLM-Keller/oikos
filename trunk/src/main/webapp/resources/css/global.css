@@ -108,5 +108,20 @@ div.clearer
 .centered
 {
 	margin-left: auto;
-	margin-right: auto;
+	margin-right: auto;4
+}
+
+/*
+ * http://www.colorcombos.com/color-scheme-271.html
+ */
+
+.notification {
+	margin: 8px;
+	padding: 16px;
+}
+
+.info {
+	border: 1px solid #9BE1FB;
+	background-color: #C5EFFD;
+	color: #006295; 	
 }
