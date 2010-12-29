@@ -16,3 +16,13 @@ table  {
 	margin: 8px;
 	padding: 16px;
 }
+
+.debug h3 {
+	margin: 6px 0px;
+	text-decoration: underline;	
+}
+
+.debug a {
+	color: #F2583E;
+	border: 0px;
+}
