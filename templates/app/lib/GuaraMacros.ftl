@@ -1,7 +1,8 @@
 <#macro debug>
 	<#if link == "http://localhost:8887">
 		<div class="debug">
-			<#nested/>
+			<div style="margin-bottom: 20px; "><h1>Debug Information</h1> <a href="">show/hide</a></div>
+			<div class="debugContents"><#nested/></div>
 		</div>
 	</#if>
 </#macro>
