@@ -68,15 +68,8 @@
 			<#case "hidden">
 			<#case "password">
 			<#case "file">
-			<#case "iMask">
 				<input 	id="${domId}"
-						<#if switchOn == "iMask">
-							class="iMask"
-							alt="${property.mask!""}"
-							name="${domId}::${property.format}"
-						<#else>
-							name="${domId}"
-						</#if>
+						name="${domId}"
 						type="${property.inputType}"  
 						value="${meta.getValueFormatted(fieldName)!""}" 
 						size="<#if (size > 0) >${size}<#else>${property.size!""}</#if>"
@@ -93,17 +86,6 @@
 			<#case "radio">
 				<#assign loader = referenceTool.getLoader("${property.referenceLoader}") />
 				<#assign selected = (loader.defaultOption.value)!"0" />
-				<#if selected != "0" && !meta.hasPrimaryKey() && switchOn == "select">
-					<#assign script>
-						dojo.addOnLoad(function () {
-							dojo.debug("firing event onChange on: ${domId}");
-							var evt = document.createEvent("HTMLEvents");
-							evt.initEvent("change", false, false);
-							dojo.byId('${domId}').dispatchEvent(evt);
-						});
-					</#assign>
-					<#assign eventsToFire = eventsToFire + [script] />
-				</#if>
 				<#if property.value?? && (meta.bean.id > 0)>
 					<#if property.isCollection() >
 						<#assign selectedOptions = property.value />
