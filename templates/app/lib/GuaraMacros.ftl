@@ -1,10 +1,47 @@
 <#macro debug>
 	<#if link == "http://localhost:8887">
 		<div class="debug">
-			<div style="margin-bottom: 20px; "><h1>Debug Information</h1> <a href="">show/hide</a></div>
+			<div style="margin-bottom: 20px; ">
+				<h1>Debug Information</h1>
+				<a class="show" href="#">show</a>
+				<a class="hide" href="#">hide</a>
+				<a class="kill" href="#">kill</a>
+			</div>
 			<div class="debugContents"><#nested/></div>
 		</div>
+		<script type="text/javascript">
+			$('.debug a.show').click(function() {
+				$('.debugContents').slideDown('fast');
+			});
+			$('.debug a.hide').click(function() {
+				$('.debugContents').slideUp('fast');
+			});
+			$('.debug a.kill').click(function() {
+				$('.debug').hide();
+			});
+		</script>
 	</#if>
+</#macro>
+
+<#macro frameworkInfo>
+	<div class="frameworkInfo" style="text-align: left;">
+		<h3>RunData</h3>
+		<b>Template:</b> ${pageInfo.template!""} <br/>
+		<b>Screen:</b> ${pageInfo.screenName!""} <br/>
+		<b>Action:</b> ${pageInfo.actionName!""} <br/>
+		
+		<h3>Parameters</h3>
+		<#assign keys = parameters.keySet() />
+		<#list keys as key>
+			${key} = ${parameters.get(key)}<br/> 
+		</#list> 
+		
+		<h3>Session</h3>
+		<#assign session = data.request.session />
+		<#list session.attributeNames as key>
+			${key} = ${session.getAttribute(key)} <br/>
+		</#list>
+	</div>
 </#macro>
 
 <#macro toolTip connectId label="tooltip" url="#" target="" domEvents={} class="" anchorClass="" style="" tabIndex="0">
