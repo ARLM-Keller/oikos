@@ -1,3 +1,11 @@
+<#macro debug>
+	<#if link == "http://localhost:8887">
+		<div class="debug">
+			<#nested/>
+		</div>
+	</#if>
+</#macro>
+
 <#macro toolTip connectId label="tooltip" url="#" target="" domEvents={} class="" anchorClass="" style="" tabIndex="0">
 	<div 	id="${connectId}:overlay"
 			dojoType="tooltip" 

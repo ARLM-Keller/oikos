@@ -2,6 +2,8 @@ package oikos.guara.modules.actions;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import oikos.register.Registration;
 import oikos.register.RegistrationManager;
 import oikos.user.Person;
@@ -77,6 +79,8 @@ public class RegistryControl
         {
             return Outcome.unknown("REGISTRATION:NO_CODE", this, "confirm");
         }
+        
+        ctx.put("registration", registration);
         if(!registration.getEmail().equals(email))
         {
             return Outcome.unknown("REGISTRATION:EMAIL_MISMATCH", this, "confirm");
@@ -88,9 +92,18 @@ public class RegistryControl
         }
         registration.confirm();
         registrationManager.store(registration);
-
+        HttpSession session = data.getRequest().getSession();
+        session.setAttribute("registration", registration);
         
         return Outcome.success(this, "confirm");
+    }
+
+    public Outcome wizard(RunData data, Context ctx) 
+        throws Exception
+    {
+        Parameters params = data.getParameters();
+        return Outcome.UNKNOWN;
+        
     }
 
     public Outcome store(RunData data, Context ctx) 

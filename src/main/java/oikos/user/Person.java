@@ -11,11 +11,12 @@ public class Person
     @ValidateRequired
     private String name;
     
-    @InputInfo(inputType="text", label="Email", format="dd/MM/yyyy")
+    @InputInfo(inputType="text", label="Email")
     @ValidateEmail
     private String email;
     
     @ValidateRequired
+    @InputInfo(inputType="password", label="Senha", size="12")
     private String password;
 
     public String getName() {return name;}
