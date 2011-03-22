@@ -9,12 +9,12 @@ import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 
+import xingu.store.ObjectStore;
+import xingu.store.PersistentBean;
 import br.com.ibnetwork.guara.metadata.BeanInfo;
 import br.com.ibnetwork.guara.pull.impl.ApplicationToolSupport;
 import br.com.ibnetwork.xingu.container.Inject;
 import br.com.ibnetwork.xingu.factory.Factory;
-import br.com.ibnetwork.xingu.store.ObjectStore;
-import br.com.ibnetwork.xingu.store.PersistentBean;
 import br.com.ibnetwork.xingu.utils.ObjectUtils;
 import br.com.ibnetwork.xingu.validator.BeanValidator;
 import br.com.ibnetwork.xingu.validator.ValidatorContext;
