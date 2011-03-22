@@ -63,8 +63,8 @@
 		</tools>
 	</component>
 	
-	<component	role="br.com.ibnetwork.xingu.store.ObjectStore"
-				class="br.com.ibnetwork.xingu.store.impl.memory.InMemoryObjectStore" />
+	<component	role="xingu.store.ObjectStore"
+				class="xingu.store.impl.memory.InMemoryObjectStore" />
 
     <component  role="br.com.ibnetwork.xingu.messaging.MessageDispatcher"
                 class="br.com.ibnetwork.xingu.messaging.impl.MessageDispatcherImpl">

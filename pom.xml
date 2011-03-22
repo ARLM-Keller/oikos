@@ -54,6 +54,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>xingu</groupId>
+			<artifactId>store-api</artifactId>
+			<version>${xingu.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>1.0.3</version>
@@ -152,8 +157,8 @@
 	   	    </repository>
 	</repositories>
 	<properties>
-	    <xingu.version>1.4.11-SNAPSHOT</xingu.version>
-	    <guara.version>1.6-SNAPSHOT</guara.version>
+	    <xingu.version>1.4.13-SNAPSHOT</xingu.version>
+	    <guara.version>1.8-SNAPSHOT</guara.version>
 	    <gwt.version>2.0.4</gwt.version>
 	    <gae.version>1.3.1</gae.version>
 	</properties>

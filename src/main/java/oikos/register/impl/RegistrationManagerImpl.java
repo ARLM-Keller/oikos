@@ -12,8 +12,8 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import xingu.store.ObjectStore;
 import br.com.ibnetwork.xingu.container.Inject;
-import br.com.ibnetwork.xingu.store.ObjectStore;
 
 public class RegistrationManagerImpl
     implements RegistrationManager, Initializable

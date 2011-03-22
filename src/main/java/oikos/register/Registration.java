@@ -2,7 +2,7 @@ package oikos.register;
 
 import java.util.Date;
 
-import br.com.ibnetwork.xingu.store.PersistentBean;
+import xingu.store.PersistentBean;
 
 public interface Registration
     extends PersistentBean
