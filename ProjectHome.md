@@ -1,0 +1,1 @@
+We plan to use this project to develop web applications related to church activities: user registry, events, content, etc
